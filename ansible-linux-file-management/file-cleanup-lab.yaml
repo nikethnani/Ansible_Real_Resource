@@ -1,0 +1,29 @@
+---
+- name: Cleanup Node
+  hosts: all
+
+  become: true
+  tasks:
+    - name: Remove files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - '/home/devops/demo-text-file.txt'
+        - '/home/devops/link-to-demo.txt'
+        - '/home/devops/new-file.txt'
+        - '/home/devops/get-pip.py'
+        - '/home/devops/files'
+        - '/home/devops/new-dir'
+    
+    - name: Reset motd
+      copy:
+        content: ""
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: 0644
+        
+
+
+        

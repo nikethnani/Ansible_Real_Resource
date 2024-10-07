@@ -1,0 +1,20 @@
+---
+- name: Using the copy module
+  hosts: nodes
+  become: True
+  tasks:
+    - name: Copy a file to managed hosts and set attributes
+      copy:
+        src: files/demo-text-file.txt
+        dest: /home/devops/demo-text-file.txt
+        owner: devops
+        group: devops
+        mode: u+rw,g-wx,o-rwx
+        # mode: 0755
+        #setype: samba_share_t
+
+    - name: Copy
+      copy: 
+        content: "This is a file with new content"
+        dest: /home/devops/newfile.txt
+        owner: devops

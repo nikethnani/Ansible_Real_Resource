@@ -1,0 +1,27 @@
+---
+- name: Handling data between Job Templates in Workflow
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Gather workflow data
+      ansible.builtin.set_fact:
+        workflow_data: "{{ workflow_data_passed | default({}) }}"
+
+    - name: Print dict before jobLevel
+      debug:
+        msg: "{{ workflow_data }}"
+
+    - name: Update workflow_data
+      ansible.builtin.set_fact:
+        workflow_data: "{{ workflow_data | default({}) | combine({jobLevel | default(100): {'jobLevel': job_level | default(100)}}, recursive=True) }}"
+
+    - name: Print dict after jobLevel
+      debug:
+        msg: "{{ workflow_data }}"
+
+    - name: Set workflow_data_passed
+      ansible.builtin.set_stats:
+        data:
+          workflow_data_passed: "{{ workflow_data | default({}) }}"
+
+    - name: Install httpd server

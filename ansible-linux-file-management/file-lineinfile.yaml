@@ -1,0 +1,10 @@
+---
+- name: Add text to an existing file
+  hosts: nodes
+  become: true
+  tasks:
+    - name: Add a single line of text to a file
+      lineinfile:
+        path: /home/devops/demo-text-file.txt
+        line: This line was added by Ansible using the lineinfile module.
+        state: present

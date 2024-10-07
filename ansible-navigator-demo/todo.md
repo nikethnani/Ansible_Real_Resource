@@ -1,0 +1,33 @@
+Demo
+- version
+- navigator welcome
+- --mode interactive
+- images, tell EE or not
+- collections
+- show collection inside the container and local
+- show collections in different image
+- show different ansible version in images
+  - ansible-navigator exec -m stdout -- ansible --version 
+- show help and explain the important options
+- show --eei, --ee
+- 
+- show subcommands
+- mention builder
+- inventory - --help-inventory
+- - ansible-navigator inventory all --graph -m stdout
+- ansible-navigator inventory all --list -m stdout -y
+- doc -l
+- :config
+  - :f <search>
+  - show fork value
+  - :open <path to that file>
+
+- show artifacts
+- show logs
+
+- run site.yaml
+- show in interactive and stdout mode
+- show replay
+- how to pass environment variable
+  - show controller GUI and credentials
+  - show how to pass env vars to EE via navigator

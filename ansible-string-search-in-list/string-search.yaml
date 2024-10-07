@@ -1,0 +1,48 @@
+---
+- name: String Search
+  hosts: localhost
+  gather_facts: False
+  vars:
+    url_list_final: []
+    url_list_to_search:
+      - "abc.com"
+      - "bc.com"
+      - "xyz.com"
+    url_list:
+      [
+        {
+        "name": "bc.com"
+        },
+        {
+        "name": "aabc.com"
+        },
+        {
+        "name": "abc.com.sg"
+        },
+        {
+        "name": "yz.com"
+        },
+        {
+        "name": "xyz.com.sg"
+        }
+      ]
+  tasks:
+    - name: "Extract and add items to List url_list_final"
+      set_fact:
+        url_list_final: "{{ url_list_final + [ url_item['name'] ] }}"
+      with_items: "{{ url_list }}"
+      loop_control:
+        loop_var: url_item
+
+    - name: Shoow 
+      debug:
+        msg: "{{ url_list }}, {{ url_list_to_search }}, {{ url_list_final }}"
+
+    - name: "Search Items in List"
+      debug:
+        msg: "{{ url_item_search }} found in the list"
+      when: "url_item_search in url_list_final"
+      with_items: "{{ url_list_to_search }}"
+      loop_control:
+        loop_var: url_item_search
+        

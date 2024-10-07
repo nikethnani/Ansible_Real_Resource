@@ -1,0 +1,12 @@
+---
+- name: User input data and templating config
+  hosts: localhost
+  vars_files:
+    - myvars.yml
+
+  tasks:
+    - name: "01 Looping through Group list"
+      include_tasks: create-group-subtask.yaml
+      loop: "{{ query('dict', az_group_config_data_new, wantlist=True)}}"
+      loop_control:
+        loop_var: ad_group_item
